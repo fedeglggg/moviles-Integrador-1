@@ -28,19 +28,17 @@
 
 		let movies = await axiosRequest2(axios1);
 
+		
+		alert("aca");
 		console.log(movies);
-		console.log(movies[2]);
 		console.log(movies.length);
 
-		let i = 0;
-		console.log(Object.size(movies));
 
-		//let movie = movies.shift();
-		//movies.forEach(addMovie(movie,0));
-
+		for (var i = movies.length - 1; i >= 0; i--) {
+			addMovie(movies[i],i);
+		}
 		showOnly10(movies.length);
 	}
-	// async a partir de aca, se ejecuta antes del .then(  => {}) del axio request
 
 	
 	
@@ -58,12 +56,17 @@
 	}
 
 
-	function axiosRequest2(axios1){
-		var movies = [];
-		for (var i = axios1.length - 1; i >= 0; i--) {
+	async function axiosRequest2(axios1){
+		console.log(axios1);
+		let move = false;
+		var movies = new Array (axios1.length);
+		for (var i = 0; i <= axios1.length - 1; i++) {
+		//let i = 0;
+		//for (const movie of movies) {
 			let url = "http://www.omdbapi.com/?i=" + axios1[i].imdbID + "&apikey=42db566a";
-			axios.get(url).then(response => {
-				movies.push(response.data); // agrego items al array
+			await axios.get(url).then(response => {
+				movies[i] = response.data; // agrego items al array
+				//i++;
 			})
 			.catch(e => {
 				console.log(e);
@@ -152,10 +155,6 @@
 		newDiv.appendChild(newP);
 		divResponse.appendChild(newDiv);
 
-		// si hay + de 10 div tienen que ocultarse el resto
-
-		/*
-
 		// genero
 		var newP = document.createElement("p");
 		newP.className = "pResponse";
@@ -170,17 +169,17 @@
 
 
 
-		imdbRating
+		// imdbRating
 		var newP = document.createElement("p");
 		newP.className = "pResponse";
 		var imdbRating = movie.imdbRating;
-		var label = "Tipo: ";
+		var label = "Valoración: ";
 		var text = label + imdbRating;
 		var node = document.createTextNode(text);
 		newP.appendChild(node);
 
 		newDiv.appendChild(newP);
-		divResponse.appendChild(newDiv)*/
+		divResponse.appendChild(newDiv)
 	}
 
 	// borra todos los divs y p's creados por la anterior busqueda
