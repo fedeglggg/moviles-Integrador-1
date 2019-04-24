@@ -14,6 +14,8 @@
 			return; 
 		}
 		makeSearchRegister();
+		// "key",value
+		sessionStorage.setItem("SearchRegister", document.getElementById("searchRegisterDiv"));
 
 		// envio el .then al return de axiosRequest()
 		let axios1 = await axiosRequest(generateUrl());
@@ -28,8 +30,6 @@
 
 		let movies = await axiosRequest2(axios1);
 
-		
-		alert("aca");
 		console.log(movies);
 		console.log(movies.length);
 
@@ -110,7 +110,6 @@
 	function addMovie(movie,i) { 
 		// crear nuevo p, nuevo texto y append el texto al p
 
-		console.log(movie);
 		var newDiv = document.createElement("div"); // unico en la funcion
 		newDiv.className = "divResponse";
 		//newDiv.id = i;
