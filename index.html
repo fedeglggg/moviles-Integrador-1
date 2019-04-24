@@ -8,6 +8,11 @@
 	<script type="text/javascript">
 
 
+	function showSearchReg() {
+		document.getElementById("searchRegisterDiv").innerHTML = 
+		sessionStorage.getItem("SearchRegister").innerHTML;
+	}
+
 	async function getMovies() {
 		initializeResponseDiv();
 		if (validate("titleInput") != true) {
@@ -15,12 +20,17 @@
 		}
 		makeSearchRegister();
 		// "key",value
-		// test 2
-		sessionStorage.setItem("SearchRegister", document.getElementById("searchRegisterDiv"));
+		if (true) {}
+
+		sessionStorage.SearchRegister = document.getElementById("searchRegisterDiv").innerHTML;
+
+		
 
 		// envio el .then al return de axiosRequest()
 		let axios1 = await axiosRequest(generateUrl());
 
+		console.log(sessionStorage.SearchRegister);
+		
 		if (axios1 === undefined) {
 			// muestro error
 			document.getElementById("noMovieWithFilters").style.display = "block";
@@ -321,11 +331,12 @@
 
 	}
 
+
 	
 
 	</script>
 </head>
-<body>
+<body onload="showSearchReg()">
 
 	<br>
 	<br>
@@ -365,7 +376,8 @@
 
 	<button onclick="getMovies()">Buscar</button>
 	<button id="mostrarMas" onclick="showTheRest()">Mostrar mas</button>
-	
+	<a href="pagDeEnvio.html"><button>GO AHEAD</button>
+	</a>
 	<!--- aca se agregan los div de cada pelicula --->
 	<div>
 		<p>Resultados de la busqueda:</p>
