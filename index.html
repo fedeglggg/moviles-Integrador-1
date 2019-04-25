@@ -6,9 +6,17 @@
 	    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript">
+		//// Remove saved data from sessionStorage
+//sessionStorage.removeItem('dataStored');
 
-
+	
+	// para el punto 6 guardamos en sessionStorage el innerHTML del div de registro de busquedas para luego volver a mostrarlo 
 	function showSearchReg() {
+		if (sessionStorage.getItem("SearchRegister") != "") {
+			
+		} else {
+			
+		}
 		document.getElementById("searchRegisterDiv").innerHTML = 
 		sessionStorage.getItem("SearchRegister").innerHTML;
 	}

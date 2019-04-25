@@ -5,11 +5,39 @@
 	<meta charset="UTF-8"> 
 	    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	    <script type="text/javascript">
+
+	    	function setItem1() {
+	    		var x = document.getElementById("1").innerHTML;
+	    		sessionStorage.setItem("itemGuardado", x);
+				destroyItem1();
+				var y = sessionStorage.getItem("itemGuardado");
+				console.log(y);
+
+	    	}
+
+	    	function destroyItem1() {
+	    		document.getElementById("1").innerHTML = "";
+	    	}
+	    	
+	    	function getItem1() {
+	    		var x = sessionStorage.getItem("itemGuardado");
+	    		document.getElementById("1").innerHTML = x;
+	    		console.log(x);
+	    	}
+	    </script>
 
 </head>
-<body>
-	<a href="index.html"><button>GO THE FUCK BAKCccC</button>
+<body onload="setItem1()">
+	<a href="index.html"><button>GO THE FUCK BAKCccC</button></a>
 	<!--- check session data --->
-</a>
+	<div id="1">
+		<!---<h1>dssad</h1>
+		<p>p1</p>
+		<p>p2</p>--->
+		
+	</div>
+	<button onclick="getItem1()">TEST</button>
+
 </body>
 </html>
