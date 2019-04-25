@@ -12,32 +12,32 @@
 	
 	// para el punto 6 guardamos en sessionStorage el innerHTML del div de registro de busquedas para luego volver a mostrarlo 
 	function showSearchReg() {
-		if (sessionStorage.getItem("SearchRegister") != "") {
-			
-		} else {
-			
-		}
-		document.getElementById("searchRegisterDiv").innerHTML = 
-		sessionStorage.getItem("SearchRegister").innerHTML;
+		let x = sessionStorage.getItem("searchRegister");
+		if (x != null) {
+			// si el item existe
+			alert("cargando research reg")
+			document.getElementById("searchRegisterDiv").innerHTML = x;		
+		} 
+	}
+
+	function updateSearchReg() {
+		let x = document.getElementById("searchRegisterDiv").innerHTML;
+		// guardo el innerHTML
+	    sessionStorage.setItem("searchRegister", x);
 	}
 
 	async function getMovies() {
+
 		initializeResponseDiv();
 		if (validate("titleInput") != true) {
 			return; 
 		}
-		makeSearchRegister();
-		// "key",value
-		if (true) {}
-
-		sessionStorage.SearchRegister = document.getElementById("searchRegisterDiv").innerHTML;
-
 		
+		makeSearchRegister();
+		updateSearchReg();
 
 		// envio el .then al return de axiosRequest()
 		let axios1 = await axiosRequest(generateUrl());
-
-		console.log(sessionStorage.SearchRegister);
 		
 		if (axios1 === undefined) {
 			// muestro error
@@ -49,8 +49,8 @@
 
 		let movies = await axiosRequest2(axios1);
 
-		console.log(movies);
-		console.log(movies.length);
+		//console.log(movies);
+		//console.log(movies.length);
 
 
 		for (var i = movies.length - 1; i >= 0; i--) {
@@ -268,45 +268,45 @@
 	}
 
 	function makeSearchRegister() {
-		var x = document.getElementById("titleInput").value;	
-		var y = document.getElementById("yearInput").value;
-		var z = document.getElementById("typeInput").value;
+		let x = document.getElementById("titleInput").value;	
+		let y = document.getElementById("yearInput").value;
+		let z = document.getElementById("typeInput").value;
 
 		// nuevo div de reg de busqueda
-		var newDiv = document.createElement("div"); 
+		let newDiv = document.createElement("div"); 
 		newDiv.className = "divSearchReg";
 
 
 
 		// agrego el texto al nuevo registro
 		// titulo
-		var newP = document.createElement("p");
+		let newP = document.createElement("p");
 		newP.className = "pSearchReg"; 
-	 	var text = document.getElementById("titleInput").value;
+	 	let text = document.getElementById("titleInput").value;
 	 	if (text != "") {
-	 		var text = "Titulo: " + text;
+	 		text = "Titulo: " + text;
 	 	}
-		var node = document.createTextNode(text);
+		let node = document.createTextNode(text);
 		newP.appendChild(node);
 		newDiv.appendChild(newP);
 
 		// año
-		var newP = document.createElement("p"); 
-	 	var text = document.getElementById("yearInput").value;
+		newP = document.createElement("p"); 
+	 	text = document.getElementById("yearInput").value;
 	 	if (text != "") {
-	 		var text = "Año: " + text;
+	 		text = "Año: " + text;
 	 	}
-		var node = document.createTextNode(text);
+		node = document.createTextNode(text);
 		newP.appendChild(node);
 		newDiv.appendChild(newP);
 
 		// tipo 
-		var newP = document.createElement("p"); 
-	 	var text = document.getElementById("typeInput").value;
+		newP = document.createElement("p"); 
+	 	text = document.getElementById("typeInput").value;
 	 	if (text != "") {
-	 		var text = "Tipo: " + text;
+	 		text = "Tipo: " + text;
 	 	}
-		var node = document.createTextNode(text);
+		node = document.createTextNode(text);
 		newP.appendChild(node);
 		newDiv.appendChild(newP);
 
@@ -393,8 +393,6 @@
 	<div id="divResponse">
 		
 	</div>
-<div id="A1" class="cc"></div>
-<div id="A2" class="cc"></div>
 
 </body>
 </html>
