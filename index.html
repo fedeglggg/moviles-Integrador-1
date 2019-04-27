@@ -18,6 +18,7 @@
 			alert("cargando research reg")
 			document.getElementById("searchRegisterDiv").innerHTML = x;		
 		} 
+		keepTheLast5SearchRegisters();
 	}
 
 	function updateSearchReg() {
@@ -28,15 +29,14 @@
 
 	async function getMovies() {
 
-		initializeResponseDiv();
+		initializeResponseDiv(); // elimina todos los resultados mostradados
 		if (validate("titleInput") != true) {
 			return; 
 		}
 		
-		makeSearchRegister();
+		makeSearchRegister(); 
 		updateSearchReg();
 
-		// envio el .then al return de axiosRequest()
 		let axios1 = await axiosRequest(generateUrl());
 		
 		if (axios1 === undefined) {
@@ -47,12 +47,14 @@
 			document.getElementById("noMovieWithFilters").style.display = "none";
 		}
 
+		// recupera las peliculas devuelta, pero esta vez con mayor informacion
 		let movies = await axiosRequest2(axios1);
 
 		//console.log(movies);
 		//console.log(movies.length);
 
 
+		// muestra las peliculas en el div correspondiente
 		for (var i = movies.length - 1; i >= 0; i--) {
 			addMovie(movies[i],i);
 		}
@@ -124,8 +126,7 @@
 	}		
 
 
-	// crea un elemento <p> por cada elemento de la pelicula y los guarda en un elemento <div>
-	// que representa la pelicula
+	// crea un elemento <p> por cada elemento de la pelicula y los guarda en un elemento <div> que representa la pelicula
 	function addMovie(movie,i) { 
 		// crear nuevo p, nuevo texto y append el texto al p
 
@@ -326,17 +327,24 @@
 		
 		// borro primeros 5
 		if (divs.length > 5) {
-			for(var i = 0; i > divs.length - 5; i++){
-		        for (var j = divs[i].length - 1; i >= 0; i--) {
-		        	while (divs[j].firstChild) {
-				    	divs[j].removeChild(divs[j].firstChild);
+			console.log("div search length" + divs.length);
+			for(let i = 0; i < divs.length - 5; i++){
+				console.log("1");
+				console.log(divs);
+				console.log(divs[i].length);
+		        for (let j = 0; j < divs[i].length - 1; i++) {
+		        	//let x = divs[i].childNodes[j];
+		        	
+		        	console.log(divs[i]);
+		        	
+		        	/*	while (divs[j].firstChild) {
+				    	divs[i].removeChild(divs[j].firstChild);
 					}
-		     	
+		     	*/
+		     	alert("here");
 		        }	
-
 	        }
 		}
-
 	}
 
 
@@ -351,7 +359,7 @@
 	<p>DeveloperTest</p>
 
 	<label for="DTitulo">Titulo: </label>
-	<input type="string" name="titleInput" id="titleInput" value="">
+	<input type="text" name="titleInput" id="titleInput" value="">
 	<br>
 	<div id="filters">
 
