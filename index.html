@@ -66,7 +66,7 @@
 	function axiosRequest(url){
 
 		// sintaxis axios -> axios.get(url).then(response => {}).catch(error => {})
-		console.log("URL de request:" + url);
+		// console.log("URL de request:" + url);
 		return axios.get(url).then(response => {
 			return response.data.Search; // devuelvo a axios, y hago return de axios para que devuelva esos valores la funcion axiosRequest() que luego recive otro .then dentro de getMovies()
 		})
@@ -78,7 +78,6 @@
 
 
 	async function axiosRequest2(axios1){
-		console.log(axios1);
 		let move = false;
 		var movies = new Array (axios1.length);
 		for (var i = 0; i <= axios1.length - 1; i++) {
@@ -190,7 +189,7 @@
 		// poster
 		var newImg = document.createElement("img");
 		newImg.className = "pResponse";
-		newImg.src = movie.Poster;
+		newImg.src = movie.poster;
 		
 		newDiv.appendChild(newImg);
 		divResponse.appendChild(newDiv);
@@ -332,25 +331,11 @@
 		
 		var divs = document.getElementsByClassName("divSearchReg");
 		var ps = document.getElementsByClassName("pSearchReg");
-		
+		var div = document.getElementById("divResponse");
 		// borro primeros 5
 		if (divs.length > 5) {
-			console.log("div search length" + divs.length);
-			for(let i = 0; i < divs.length - 5; i++){
-				console.log("1");
-				console.log(divs);
-				console.log(divs[i].length);
-		        for (let j = 0; j < divs[i].length - 1; i++) {
-		        	//let x = divs[i].childNodes[j];
-		        	
-		        	console.log(divs[i]);
-		        	
-		        	/*	while (divs[j].firstChild) {
-				    	divs[i].removeChild(divs[j].firstChild);
-					}
-		     	*/
-		     	alert("here");
-		        }	
+			for(let i = 0; i < divs.length - 5; i++){	
+		        divs[i].parentNode.removeChild(divs[i]);
 	        }
 		}
 	}
