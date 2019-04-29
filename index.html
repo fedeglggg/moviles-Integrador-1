@@ -15,7 +15,7 @@
 		let x = sessionStorage.getItem("searchRegister");
 		if (x != null) {
 			// si el item existe
-			alert("cargando research reg")
+			// alert("cargando research reg")
 			document.getElementById("searchRegisterDiv").innerHTML = x;		
 		} 
 		keepTheLast5SearchRegisters();
@@ -186,6 +186,14 @@
 		newDiv.appendChild(newP);
 		divResponse.appendChild(newDiv);
 
+
+		// poster
+		var newImg = document.createElement("img");
+		newImg.className = "pResponse";
+		newImg.src = movie.Poster;
+		
+		newDiv.appendChild(newImg);
+		divResponse.appendChild(newDiv);
 
 
 		// imdbRating
